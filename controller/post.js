@@ -30,11 +30,11 @@ const fetchPost = async (req, res, next) => {
   }
 };
 
-const fetchForInfiniteScroll = async (req, res, next) => {
+const fetchPostByTime = async (req, res, next) => {
   try {
     const startTimeObjectId = req.query.id;
     const startTime = dateFromPostId(req.query.id);
-    const endTime = new Date(startTime.setHours(startTime.getHours() - 1));
+    const endTime = new Date(startTime.setHours(startTime.getHours() - 2));
     const endTimeObjectId = idToDate(endTime);
     const response = await Post.find({
       $and: [
@@ -59,5 +59,5 @@ const dateFromPostId = (postId) => {
 module.exports = {
   addNewPost,
   fetchPost,
-  fetchForInfiniteScroll,
+  fetchPostByTime,
 };
